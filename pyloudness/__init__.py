@@ -45,9 +45,9 @@ def set_loudness(file_location, loudness_in_dB=-23, ignore_clipping=False):
     assert peak<=0.0, 'Peak allegedly positive (dB)'
     if peak + gain_in_dB >= 0.0: # check if clipping (liberally)
         if ignore_clipping:
-            print 'WARNING: '+output_file+' clipped on writing!'
+            print('WARNING: '+output_file+' clipped on writing!')
         else:
-            print file_location+' would clip if gain applied to reach '+str(loudness_in_dB)+' LUFS; skipping!'
+            print(file_location+' would clip if gain applied to reach '+str(loudness_in_dB)+' LUFS; skipping!')
             return # skip, don't apply gain
     # apply gain
     command = ['ffmpeg', '-y', '-i', file_location,  '-af', 'volume='+str(linear_gain), output_file]
